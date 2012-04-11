@@ -1,0 +1,1 @@
+../src/easierStorage.js
