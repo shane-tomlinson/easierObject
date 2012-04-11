@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+  <title>Test!</title>
+	<link rel="stylesheet" href="mocha/mocha.css" type="text/css" media="screen">
+  <script src="mocha/mocha.js"></script>
+  <script>mocha.setup("bdd");</script>
+
+  <script>
+    function assert(expr, msg) {
+      if (!expr) throw new Error(msg || 'failed');
+    }
+  </script>
+
+  <script src="jsoner.js"></script>
+  <script src="jsoner_test.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      mocha.run();
+    }, false);
+  </script>
+</head>
+<body>
+  <div id="mocha"></div>
+
+</body>
+</html>
