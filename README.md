@@ -1,24 +1,22 @@
-# easierStorage
-easierStorage makes it easier to work with localStorage by allowing you to read, write or delete into localStorage without checking whether every item in the object chain exists.
+# easierObject
+easierObject is a micro-library to make operating in arbitrary locations in a Javascript object tree simple.
 
 ## Examples
 ```
-// Write an item 3 levels deep without ever checking whether top or middle
-// exist.  calling setItem like this will automatically create any nodes that
-// are needed.
-easierStorage.setItem("top", "middle", "leaf", "oooh!");
+// Write an item 3 levels deep in the tree without ever checking whether the
+// intermediate nodes exist.
+var easyObj = new easierObject({});
+easyObj.setItem("root", "left", "leaf", "oooh!");
 
-// Write into a new branch off of the top, this will not destroy the middle
+// Write into a new branch off of the root, this will not destroy the middle
 // branch.
-easierStorage.setItem("top", "right", "end", "wee!");
+easyObj.setItem("root", "right", "leaf", "wee!");
 
-// Go directly to the item you want to get, without checking whether top or
-// middle exist. Returns undefined if any nodes do not exist.
-var leafValue = easierStorage.getItem("top", "middle", "leaf");
+// Go directly to the item you want to get without checking whether root or
+// middle exist.  Returns undefined if any nodes do not exist.
+var leafValue = easyObj.getItem("root", "left", "leaf");
 // leafValue === "oooh!"
 
-
-```
 ## License:
 Mozilla MPL 2.0
 
