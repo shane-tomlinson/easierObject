@@ -1,16 +1,15 @@
 (function(exports) {
   "use strict";
 
-  function setItem() {
-    var args = [].slice.call(arguments, 0),
-        value = args.pop(),
-        obj = this.obj,
-        len = args.length;
-
-    if(!len) {
-      throw "setItem must be called with at least one key and a value";
+  function setItem(key, value) {
+    if(typeof key === "undefined" || typeof value === "undefined") {
+      throw "setItem must be called with a key and value";
     }
     else {
+      var args = key.split("."),
+          len = args.length,
+          obj = this.obj;
+
       for(var index = 0, key, max = len - 1; key = args[index]; ++index) {
         if(index === max) {
           obj[key] = value;
@@ -23,9 +22,9 @@
   }
 
   function getItem(key) {
-    var args = [].slice.call(arguments, 0),
-        obj = this.obj,
-        len = args.length;
+    var args = key && key.split("."),
+        len = args && args.length,
+        obj = this.obj;
 
     if(!len) {
       return this.obj;
@@ -42,15 +41,15 @@
     }
   }
 
-  function removeItem() {
-    var args = [].slice.call(arguments, 0),
-        obj = this.obj,
-        len = args.length;
-
-    if(!len) {
-      throw "removeItem must be called with at least one key";
+  function removeItem(key) {
+    if(typeof key === "undefined") {
+      throw "removeItem must be called with a key";
     }
     else {
+      var args = key.split("."),
+          len = args.length,
+          obj = this.obj;
+
       for(var index = 0, key, max = len - 1; obj && (key = args[index]); ++index) {
         if(index === max) {
           obj[key] = null;
