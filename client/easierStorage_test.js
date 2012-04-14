@@ -1,15 +1,14 @@
 
 (function() {
 
-  describe("easierStorage", function() {
+  describe("easierObject", function() {
     it("should exist", function() {
-      assert(typeof easierStorage !== "undefined", "easierStorage exists");
+      assert(typeof easierObject !== "undefined", "easierObject exists");
     });
 
+    var easyObj;
     beforeEach(function() {
-      for(var key in localStorage) {
-        localStorage.removeItem(key);
-      }
+      easyObj = new easierObject({});
     });
 
 
@@ -17,7 +16,7 @@
       it("setItem must have at least one key and one value", function() {
         var err;
         try {
-          easierStorage.setItem("first");
+          easyObj.setItem("first");
         } catch(e) {
           err = e;
         }
@@ -26,28 +25,24 @@
       });
 
       it("setItem setItems value, getItem getItems value", function() {
-        easierStorage.setItem("first", "value");
-        assert(easierStorage.getItem("first") === "value", "correct getItem after setItem");
+        easyObj.setItem("first", "value");
+        assert(easyObj.getItem("first") === "value", "correct getItem after setItem");
       });
 
-      it("getItem with no keys throws an exception", function() {
-        var err;
-        try {
-          easierStorage.getItem()
-        } catch(e) {
-          err = e;
-        }
-        assert(err);
+      it("getItem with no keys gets entire object", function() {
+        easyObj.setItem("first", "value");
+        var obj =  easyObj.getItem();
+        assert(obj.first === "value");
       });
 
       it("setItem/getItem with 2 keys", function() {
-        easierStorage.setItem("first", "second", "some value");
-        assert(easierStorage.getItem("first", "second") === "some value", "setItem/getItem with 2 keys");
+        easyObj.setItem("first", "second", "some value");
+        assert(easyObj.getItem("first", "second") === "some value", "setItem/getItem with 2 keys");
       });
 
       it("getItem of undefined leaf returns undefined", function() {
-        assert(typeof easierStorage.getItem("unknown") === "undefined");
-        assert(typeof easierStorage.getItem("unknown", "unknown") === "undefined");
+        assert(typeof easyObj.getItem("unknown") === "undefined");
+        assert(typeof easyObj.getItem("unknown", "unknown") === "undefined");
       });
     });
 
@@ -55,7 +50,7 @@
       it("removeItem without a key - throw exception", function() {
         var err;
         try {
-          easierStorage.removeItem();
+          easyObj.removeItem();
         } catch(e) {
           err = e;
         }
@@ -67,7 +62,7 @@
       it("removeItems an unknown item - does not cause problem", function() {
         var err;
         try {
-          easierStorage.removeItem("first");
+          easyObj.removeItem("first");
         } catch(e) {
           err = e;
         }
@@ -76,16 +71,16 @@
       });
 
       it("removeItems a leaf", function() {
-        easierStorage.setItem("first", "second", "third", "value");
-        easierStorage.removeItem("first", "second", "third");
-        assert(typeof easierStorage.getItem("first", "second", "third") === "undefined");
+        easyObj.setItem("first", "second", "third", "value");
+        easyObj.removeItem("first", "second", "third");
+        assert(typeof easyObj.getItem("first", "second", "third") === "undefined");
       });
 
       it("removeItems a branch", function() {
-        easierStorage.setItem("first", "second", "third", "value");
-        easierStorage.removeItem("first", "second");
-        assert(typeof easierStorage.getItem("first", "second") === "undefined");
-        assert(typeof easierStorage.getItem("first").second === "undefined");
+        easyObj.setItem("first", "second", "third", "value");
+        easyObj.removeItem("first", "second");
+        assert(typeof easyObj.getItem("first", "second") === "undefined");
+        assert(typeof easyObj.getItem("first").second === "undefined");
       });
     });
   });

@@ -3,54 +3,35 @@
 
   function setItem() {
     var args = [].slice.call(arguments, 0),
-        rootname = args[0],
         value = args.pop(),
-        obj,
-        root,
+        obj = this.obj,
         len = args.length;
 
     if(!len) {
       throw "setItem must be called with at least one key and a value";
     }
     else {
-      root = obj = JSON.parse(localStorage[rootname] || "{}");
-
-      if(len === 1) {
-        root = value;
-      }
-      else {
-        for(var index = 1, key, max = len - 1; key = args[index]; ++index) {
-          if(index === max) {
-            obj[key] = value;
-          }
-          else {
-            obj = obj[key] = obj[key] || {};
-          }
+      for(var index = 0, key, max = len - 1; key = args[index]; ++index) {
+        if(index === max) {
+          obj[key] = value;
+        }
+        else {
+          obj = obj[key] = obj[key] || {};
         }
       }
-
-      localStorage[rootname] = JSON.stringify(root);
     }
   }
 
   function getItem(key) {
     var args = [].slice.call(arguments, 0),
-        rootname = args[0],
-        len = args.length,
-        max = len - 1;
+        obj = this.obj,
+        len = args.length;
 
-    if(len === 0) {
-      throw "getItem must be called with at least one key";
-    }
-    else if(len === 1) {
-      var value = localStorage[rootname],
-          undef;
-      return (typeof value !== "undefined" && value !== null) ? JSON.parse(value) : undef;
+    if(!len) {
+      return this.obj;
     }
     else {
-      var obj = JSON.parse(localStorage[rootname] || "{}");
-
-      for(var index = 1, key; obj && (key = args[index]); ++index) {
+      for(var index = 0, key, max = len - 1; obj && (key = args[index]); ++index) {
         if(index === max) {
           return obj[key];
         }
@@ -63,20 +44,14 @@
 
   function removeItem() {
     var args = [].slice.call(arguments, 0),
-        rootname = args[0],
+        obj = this.obj,
         len = args.length;
 
-    if(len === 0) {
+    if(!len) {
       throw "removeItem must be called with at least one key";
     }
-    else if(len === 1) {
-      localStorage.removeItem(rootname);
-    }
     else {
-      var root = JSON.parse(localStorage[rootname] || "{}"),
-          obj = root;
-
-      for(var index = 1, key, max = len - 1; obj && (key = args[index]); ++index) {
+      for(var index = 0, key, max = len - 1; obj && (key = args[index]); ++index) {
         if(index === max) {
           obj[key] = null;
           delete obj[key];
@@ -85,13 +60,14 @@
           obj = obj[key];
         }
       }
-
-      localStorage[rootname] = JSON.stringify(root);
     }
-
   }
 
-  exports.easierStorage = {
+  exports.easierObject = function(obj) {
+    this.obj = obj;
+  }
+
+  exports.easierObject.prototype = {
     setItem: setItem,
     getItem: getItem,
     removeItem: removeItem
