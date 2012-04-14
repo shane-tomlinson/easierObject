@@ -1,0 +1,1 @@
+../src/easierObject.js
