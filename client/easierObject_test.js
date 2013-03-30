@@ -83,6 +83,18 @@
         assert(typeof easyObj.getItem("first").second === "undefined");
       });
     });
+
+    it("can be used without passing in an object", function() {
+      easyObj = new easierObject();
+      var err;
+      try {
+        var firstItem = easyObj.getItem("first");
+      } catch(e) {
+        err = e;
+      }
+      assert(typeof err === "undefined");
+    });
+
   });
 }());
 

@@ -1,0 +1,22 @@
+{
+  "Author": "Shane Tomlinson <shane@shanetomlinson.com> (https://shanetomlinson.com)",
+  "name": "easierobject",
+  "description": "Micro-library to make operating in arbitrary locations in a Javascript object tree simple",
+  "keywords": ["objects"],
+  "homepage": "https://github.com/stomlinson/easierObject",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stomlinson/easierObject.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stomlinson/easierObject/issues"
+  },
+  "version": "0.0.1",
+  "main": "src/easierObject.js",
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "scripts": {
+  }
+}

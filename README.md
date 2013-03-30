@@ -16,6 +16,7 @@ easyObj.setItem("root", "right", "leaf", "wee!");
 // middle exist.  Returns undefined if any nodes do not exist.
 var leafValue = easyObj.getItem("root", "left", "leaf");
 // leafValue === "oooh!"
+```
 
 ## License:
 Mozilla MPL 2.0

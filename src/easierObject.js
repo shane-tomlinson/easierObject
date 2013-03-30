@@ -1,3 +1,5 @@
+var namespace = typeof window !== "undefined" ? window : typeof exports !== "undefined" ? exports : {};
+
 (function(exports) {
   "use strict";
 
@@ -64,7 +66,7 @@
   }
 
   exports.easierObject = function(obj) {
-    this.obj = obj;
+    this.obj = obj || {};
   }
 
   exports.easierObject.prototype = {
@@ -72,4 +74,4 @@
     getItem: getItem,
     removeItem: removeItem
   };
-}(window || exports));
+}(namespace));
