@@ -73,6 +73,7 @@
   };
 
   exports.easierObject.prototype = {
+    constructor: exports.easierObject,
     setItem: setItem,
     getItem: getItem,
     removeItem: removeItem
