@@ -1,5 +1,5 @@
 # easierObject
-easierObject is a micro-library to make operating in arbitrary locations in a Javascript object tree simple.
+Read, write and delete from arbitrary locations in JavaScript objects using a localStorage-like API.
 
 ## Examples
 ```
@@ -16,6 +16,10 @@ easyObj.setItem("root", "right", "leaf", "wee!");
 // middle exist.  Returns undefined if any nodes do not exist.
 var leafValue = easyObj.getItem("root", "left", "leaf");
 // leafValue === "oooh!"
+
+// Fetch raw data
+var raw = easyObj.raw();
+// raw.root.leaf.leaf === "oooh!"
 ```
 
 ## License:
@@ -27,5 +31,5 @@ Mozilla MPL 2.0
 * shane@shanetomlinson.com
 * set117@yahoo.com
 * stomlinson@mozilla.com
-* http://shanetomlinson.com
+* https://shanetomlinson.com
 

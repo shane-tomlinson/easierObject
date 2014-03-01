@@ -1,8 +1,8 @@
 {
   "Author": "Shane Tomlinson <shane@shanetomlinson.com> (https://shanetomlinson.com)",
   "name": "easierobject",
-  "description": "Micro-library to simplify reads, writes and deletions from arbitrary locations in JavaScript objects",
-  "keywords": ["objects"],
+  "description": "Read, write and delete from arbitrary locations in JavaScript objects using a localStorage-like API",
+  "keywords": ["objects", "localStorage", "sessionStorage", "interface"],
   "homepage": "https://github.com/stomlinson/easierObject",
   "repository": {
     "type": "git",
@@ -11,7 +11,8 @@
   "bugs": {
     "url": "https://github.com/stomlinson/easierObject/issues"
   },
-  "version": "0.0.3",
+  "version": "0.0.4",
+  "license": "MPL 2.0",
   "main": "src/easierObject.js",
   "dependencies": {
   },

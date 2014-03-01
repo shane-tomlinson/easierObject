@@ -67,6 +67,11 @@
     }
   }
 
+  function raw() {
+    /*jshint validthis: true*/
+    return this.obj;
+  }
+
   exports.easierObject = function(obj) {
     /*jshint validthis: true*/
     this.obj = obj || {};
@@ -76,6 +81,7 @@
     constructor: exports.easierObject,
     setItem: setItem,
     getItem: getItem,
-    removeItem: removeItem
+    removeItem: removeItem,
+    raw: raw
   };
 }(typeof process !== 'undefined' && typeof process.title !== 'undefined' && typeof exports !== 'undefined' ? exports : window));

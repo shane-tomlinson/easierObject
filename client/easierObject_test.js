@@ -2,14 +2,29 @@
 (function() {
 
   describe("easierObject", function() {
-    it("should exist", function() {
-      assert(typeof easierObject !== "undefined", "easierObject exists");
-    });
-
     var easyObj;
     beforeEach(function() {
       easyObj = new easierObject({});
     });
+
+
+    describe('constructor', function () {
+      it("should exist", function() {
+        assert(typeof easierObject !== "undefined", "easierObject exists");
+      });
+
+      it("can be used without passing in an object", function() {
+        easyObj = new easierObject();
+        var err;
+        try {
+          var firstItem = easyObj.getItem("first");
+        } catch(e) {
+          err = e;
+        }
+        assert(typeof err === "undefined");
+      });
+    });
+
 
 
     describe("setItem/getItem", function() {
@@ -84,17 +99,13 @@
       });
     });
 
-    it("can be used without passing in an object", function() {
-      easyObj = new easierObject();
-      var err;
-      try {
-        var firstItem = easyObj.getItem("first");
-      } catch(e) {
-        err = e;
-      }
-      assert(typeof err === "undefined");
+    describe('raw', function () {
+      it('gets raw data', function () {
+        easyObj.setItem("first", "second", "value");
+        var raw = easyObj.raw();
+        assert(raw.first.second === "value");
+      });
     });
-
   });
 }());
 
